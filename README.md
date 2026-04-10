@@ -1,112 +1,47 @@
-# SafeCity
+SafeCity
+SafeCity is a web app that gives you a safer walking route by routing you around areas with high crime activity. Instead of just finding the fastest path, it looks at real NYC crime data and adjusts your route to avoid flagged spots.
+We built this in 12 hours at a hackathon.
 
-> Navigate smarter. Stay safer.
+The Idea
+Normal navigation apps don't think about safety — they just find the fastest route. In New York that can mean walking through some rough areas without even knowing it. We wanted to fix that by using actual crime data to inform how routes get calculated.
 
-SafeCity is a web application built at the **Kean University Hackathon** that helps users find safer walking or travel routes by analyzing real crime data. Instead of finding the *shortest* path, SafeCity finds the *safest* one — routing you away from areas with higher reported crime activity.
+How the Routing Works
+The core logic is pretty straightforward:
 
----
+User enters a start point and destination
+We load NYC crime data (pulled from a public dataset) and mark those locations on the map
+We check each point along the suggested route — if it's flagged as a crime location, we reroute around it
+We keep doing that until the path either avoids all crime points or gets as safe as it can be
+The final route gets displayed on the map
 
-## Features
 
-- **Safe Route Generation** — Calculates routes that avoid high-crime areas based on real crime data points
-- **Interactive Map** — Visualizes crime hotspots and your suggested safe path
-- **Crime Data Integration** — Uses crime incident data to score and weight route options
-- **Real-time Navigation** — Fast, responsive UI built with Next.js
+Tech Stack
 
----
+Next.js + TypeScript — frontend
+Mapbox API — map rendering and routing
+NYC crime dataset (public Excel data) — crime point data
+CSS — styling
 
-## Tech Stack
 
-| Layer | Technology |
-|-------|-----------|
-| Framework | [Next.js](https://nextjs.org/) (App Router) |
-| Language | TypeScript |
-| Styling | CSS / PostCSS |
-| Linting | ESLint |
-
----
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js `v18+`
-- npm, yarn, pnpm, or bun
-
-### Installation
-
-```bash
-git clone https://github.com/nurbu/safeCity.git
+Running it locally
+You'll need Node.js and a Mapbox API key.
+bashgit clone https://github.com/nurbu/safeCity.git
 cd safeCity
 npm install
-```
+Create a .env.local file:
+envNEXT_PUBLIC_MAPBOX_TOKEN=your_token_here
+Then:
+bashnpm run dev
+Go to http://localhost:3000.
 
-### Running the Development Server
+What we'd add with more time
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Crime heatmap so you can see density, not just individual points
+Weight routes by crime type or severity
+Let users report incidents directly in the app
+Support for cities outside NYC
+Make it work better on mobile
 
-Open [http://localhost:3000](http://localhost:3000) in your browser to see the app.
 
----
-
-## Project Structure
-
-```
-safeCity/
-├── public/           # Static assets
-├── src/
-│   └── app/          # Next.js App Router pages & components
-├── next.config.ts    # Next.js configuration
-├── tsconfig.json     # TypeScript configuration
-└── package.json      # Dependencies & scripts
-```
-
----
-
-## How It Works
-
-1. User inputs a start and destination point on the map.
-2. Crime data points are loaded and mapped geographically.
-3. The routing algorithm penalizes paths that pass near crime hotspots.
-4. The app returns the optimal safe route — balancing distance with safety score.
-
----
-
-## Built At
-
-**Kean University Hackathon**
-A time-limited hackathon challenge focused on building practical solutions for community safety.
-
----
-
-## Contributing
-
-Pull requests are welcome. If you'd like to improve the routing algorithm, add new data sources, or enhance the UI, feel free to fork the repo and open a PR.
-
-1. Fork the project
-2. Create your feature branch (`git checkout -b feature/my-feature`)
-3. Commit your changes (`git commit -m 'Add my feature'`)
-4. Push to the branch (`git push origin feature/my-feature`)
-5. Open a Pull Request
-
----
-
-## License
-
-This project is open source. See the repository for details.
-
----
-
-## Acknowledgements
-
-- Crime data sourced from public datasets
-- Built with [Next.js](https://nextjs.org/) by Vercel
-- Inspired by the goal of making cities safer for everyone
+Team
+Built by a small team at a hackathon. Backend, routing logic, and Mapbox integration by @nurbu.
