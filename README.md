@@ -44,4 +44,4 @@ Make it work better on mobile
 
 
 Team
-Built by a small team at a hackathon. Backend, routing logic, and Mapbox integration by @nurbu.
+Jesus and Nurbu
